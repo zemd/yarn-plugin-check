@@ -69,7 +69,7 @@ class CheckCommand extends Command<CommandContext> {
       } catch(error) {
         const message = `× ${this.message || `The port ${this.port} is in use.`}`
         this.context.stdout.write(`${chalk.red(message)}\n`);
-        process.exitCode = 1;
+        process.exit(1);
       }
     }
     if (this.command) {
@@ -85,7 +85,7 @@ class CheckCommand extends Command<CommandContext> {
         });
         if (result.exitCode > 0) {
           this.context.stdout.write(`${chalk.red('The command failed. ' + (this.message || ''))}\n`);
-          process.exitCode = 1;
+          process.exit(1);
         } else {
           this.context.stdout.write(`${chalk.green('The command didn\'t fail. ' + (this.message || ''))}\n`);
         }
@@ -95,7 +95,7 @@ class CheckCommand extends Command<CommandContext> {
           this.context.stderr.write('\n');
         }
         this.context.stdout.write(`${chalk.red('The command failed. ' + (this.message || ''))}\n`);
-        process.exitCode = 1;
+        process.exit(1);
       }
     }
   }
